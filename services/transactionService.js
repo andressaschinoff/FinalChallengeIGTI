@@ -89,6 +89,8 @@ const findOnlyPeriod = async (_req, res) => {
       };
     });
 
+    allPeriods.sort((a, b) => a.yearMonth.localeCompare(b.yearMonth));
+
     res.send(allPeriods);
   } catch (error) {
     res.status(500).send({ message: 'Erro ao buscar o periodo: ' + period });
@@ -108,6 +110,8 @@ const findByPeriod = async (req, res) => {
         message: `Periodo ${period} não consta no banco de dados`,
       });
     }
+
+    periodTransactions.sort((a, b) => a.day - b.day);
 
     res.send(periodTransactions);
   } catch (error) {
